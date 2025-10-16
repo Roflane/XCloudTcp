@@ -1,0 +1,22 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XCloudServer", "XCloudServer\XCloudServer.csproj", "{11DD7079-68E9-43B3-AE6B-02C84103AF80}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XCloudClient", "XCloudClient\XCloudClient.csproj", "{FF1DB935-8AE2-40C2-BA7A-79EE63D9AFA8}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{11DD7079-68E9-43B3-AE6B-02C84103AF80}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{11DD7079-68E9-43B3-AE6B-02C84103AF80}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{11DD7079-68E9-43B3-AE6B-02C84103AF80}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{11DD7079-68E9-43B3-AE6B-02C84103AF80}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FF1DB935-8AE2-40C2-BA7A-79EE63D9AFA8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FF1DB935-8AE2-40C2-BA7A-79EE63D9AFA8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FF1DB935-8AE2-40C2-BA7A-79EE63D9AFA8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FF1DB935-8AE2-40C2-BA7A-79EE63D9AFA8}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
