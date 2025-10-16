@@ -2,6 +2,7 @@ using System.Net.Sockets;
 using XCloudRepo.Configs;
 using XCloudRepo.Core;
 using XCloudRepo.Enums;
+using XCloudServer.Configs;
 
 namespace XCloudRepo.ResponseHandler;
 
@@ -31,7 +32,7 @@ public class XResponseHandler {
 
     
     public bool FileSize(long fileSize, Socket client, Action log) {
-        if (fileSize > XCloudServerConfig.MaxFileBufferSize) {
+        if (fileSize > XCommonConfig.MaxFileBufferSize) {
             log.Invoke();
             client.Send(BitConverter.GetBytes((long)EResponseCode.FileSizeOverflow));
             return false;
@@ -41,7 +42,7 @@ public class XResponseHandler {
     }
     
     public async Task<bool> FileSizeAsync(long fileSize, Socket client, Action log) {
-        if (fileSize > XCloudServerConfig.MaxFileBufferSize) {
+        if (fileSize > XCommonConfig.MaxFileBufferSize) {
             log.Invoke();
             await client.SendAsync(BitConverter.GetBytes((long)EResponseCode.FileSizeOverflow));
             return false;

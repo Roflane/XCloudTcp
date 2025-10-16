@@ -1,10 +1,8 @@
-﻿using XCloudRepo.Server;
-
-namespace XCloudRepo;
+﻿namespace XCloudServer;
 
 static class Program {
     static async Task Main() {
-        XCloudServer server = new("127.0.0.1:4773"); 
+        XCloudTcp.Server.XCloudServer server = new("192.168.31.126:4773"); 
         Console.Title = $"[{server.Ip}:{server.Port}] XCloud server";
         await server.BeginListening();
     }

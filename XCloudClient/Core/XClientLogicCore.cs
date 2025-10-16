@@ -95,8 +95,8 @@ public class XClientLogicCore(Socket socket, XCloudFunc func, XBuffer xb, XRespo
         }
 
         Log.Green("Enter file path to upload: ");
-        string filePath = Console.ReadLine()!;
-
+        string filePath = Console.ReadLine()!.Replace("\"", "");
+ 
         try {
             FileInfo fi = new FileInfo(filePath);
             if (!rh.LocalFileExists(fi.Exists, fi.Name, () => {
@@ -228,16 +228,13 @@ public class XClientLogicCore(Socket socket, XCloudFunc func, XBuffer xb, XRespo
         long totalReceived = 0;
 
         Thread thread = new Thread(() => {
-            using (FileStream fs = new FileStream(localPath, FileMode.Create, FileAccess.Write)) {
-                while (totalReceived < remoteFileSize) {
-                    int receivedBytes = socket.Receive(chunk, 0, chunk.Length, SocketFlags.None);
-                    if (receivedBytes <= 0) break;
-                    fs.Write(chunk, 0, receivedBytes);
-                    totalReceived += receivedBytes;
-                }
+            using FileStream fs = new FileStream(localPath, FileMode.Create, FileAccess.Write);
+            while (totalReceived < remoteFileSize) {
+                int receivedBytes = socket.Receive(chunk, 0, chunk.Length, SocketFlags.None);
+                if (receivedBytes <= 0) break;
+                fs.Write(chunk, 0, receivedBytes);
+                totalReceived += receivedBytes;
             }
-
-            Log.Green($"File downloaded successfully ({remoteFileName}, {remoteFileSize} bytes)");
         });
         thread.Start();
         return true;

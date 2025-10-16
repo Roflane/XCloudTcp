@@ -5,6 +5,7 @@ using XCloudRepo.Configs;
 using XCloudRepo.Enums;
 using XCloudRepo.Internals;
 using XCloudRepo.ResponseHandler;
+using XCloudServer.Configs;
 
 namespace XCloudRepo.Core;
 
@@ -108,7 +109,7 @@ public class XServerLogicCore(Socket client, XCloudFunc func, XBuffer xb, XRespo
         client.Send(fileNameBytes);
         client.Send(BitConverter.GetBytes(IPAddress.HostToNetworkOrder(fi.Length)));
 
-        byte[] buffer = new byte[XCloudServerConfig.chunkSize];
+        byte[] buffer = new byte[XCommonConfig.ChunkSize];
         long totalSent = 0;
 
         using (FileStream fs = new FileStream(fileToDownload, FileMode.Open, FileAccess.Read, FileShare.Read)) {
@@ -140,7 +141,7 @@ public class XServerLogicCore(Socket client, XCloudFunc func, XBuffer xb, XRespo
         client.Send(fileNameBytes);
         client.Send(BitConverter.GetBytes(IPAddress.HostToNetworkOrder(fi.Length)));
 
-        byte[] buffer = new byte[XCloudServerConfig.chunkSize];
+        byte[] buffer = new byte[XCommonConfig.ChunkSize];
         long totalSent = 0;
 
         Thread downloadThread = new Thread(() => {

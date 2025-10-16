@@ -57,33 +57,33 @@ public class XCloudClient : IDisposable {
                 byte[] buffer = new byte[1024 * 10];
                 
                 switch (option) {
-                    case XCloudClientConfig.DirectoryViewRoot:
+                    case XCommonConfig.DirectoryViewRoot:
                         await clientLogicCoreImpl.ViewRootDirectoryAsync(buffer);
                         break;
-                    case XCloudClientConfig.DirectoryCreate:
+                    case XCommonConfig.DirectoryCreate:
                         await clientLogicCoreImpl.CreateDirectoryAsync(buffer);
                         break;
-                    case XCloudClientConfig.DirectoryDelete:
+                    case XCommonConfig.DirectoryDelete:
                         await clientLogicCoreImpl.DeleteDirectoryAsync();
                         break;
-                    case XCloudClientConfig.DirectoryRename:
+                    case XCommonConfig.DirectoryRename:
                         await clientLogicCoreImpl.RenameDirectoryAsync();
                         break;
-                    case XCloudClientConfig.FileUpload:
+                    case XCommonConfig.FileUpload:
                         try { clientLogicCoreImpl.UploadFileParallel(); }
                         catch (Exception ex) { Log.Red(ex.Message, true); }
                         break;
-                    case XCloudClientConfig.FileDownload:
+                    case XCommonConfig.FileDownload:
                         try { clientLogicCoreImpl.DownloadFileParallel(); }
                         catch (Exception ex) { Log.Red(ex.Message, true); }
                         break;
-                    case XCloudClientConfig.FileDelete:
+                    case XCommonConfig.FileDelete:
                         await clientLogicCoreImpl.DeleteFileAsync();
                         break;
-                    case XCloudClientConfig.FileRename:
+                    case XCommonConfig.FileRename:
                         await clientLogicCoreImpl.RenameFileAsync();
                         break;
-                    case XCloudClientConfig.FileCopy:
+                    case XCommonConfig.FileCopy:
                         await clientLogicCoreImpl.CopyFileAsync();
                         break;
                 }

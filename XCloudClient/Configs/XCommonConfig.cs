@@ -1,8 +1,8 @@
-namespace XCloudRepo.Configs;
+namespace XCloudClient.Configs;
 
-public static class XCloudServerConfig {
+public static class XCommonConfig {
     public const int MaxFileBufferSize = 1024 * 100 * 1024;
-    public const int chunkSize = 1024 * 16;
+    public const int ChunkSize = 1024 * 16;
     
     public const string Register = "Register";
     public const string Auth = "Auth";
@@ -17,4 +17,5 @@ public static class XCloudServerConfig {
     public const string FileDelete = "frm";
     public const string FileRename = "fr";
     public const string FileCopy = "fc";
+
 }

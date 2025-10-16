@@ -6,8 +6,9 @@ using XCloudRepo.Configs;
 using XCloudRepo.Core;
 using XCloudRepo.Internals;
 using XCloudRepo.ResponseHandler;
+using XCloudServer.Configs;
 
-namespace XCloudRepo.Server;
+namespace XCloudTcp.Server;
 
 public class XCloudServer : IDisposable {
     private readonly Socket _socket = new(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
@@ -79,11 +80,11 @@ public class XCloudServer : IDisposable {
                     string userDataFormat = Encoding.UTF8.GetString(xb.UserDataBuffer, 0, client.Receive(xb.UserDataBuffer));
 
                     switch (enterRequest) {
-                        case XCloudServerConfig.Register:
+                        case XCommonConfig.Register:
                             bool registerStatus = accountManager.RegisterUser(userDataFormat).Result;
                             PLog.Register(registerStatus, client.RemoteEndPoint!.ToString(), accountManager.UserLogin);
                             break;
-                        case XCloudServerConfig.Auth:
+                        case XCommonConfig.Auth:
                             bool authStatus = accountManager.AuthUser(userDataFormat).Result;
                             PLog.Auth(authStatus, client.RemoteEndPoint!.ToString(), accountManager.UserLogin);
                             break;
@@ -95,32 +96,32 @@ public class XCloudServer : IDisposable {
                     
                     string request = Encoding.UTF8.GetString(xb.RequestBuffer, 0, client.Receive(xb.RequestBuffer));
                     switch (request) {
-                        case XCloudServerConfig.DirectoryViewRoot:
+                        case XCommonConfig.DirectoryViewRoot:
                             serverCoreLogicImpl.ViewRootDirectory(core);
                             break;
-                        case XCloudServerConfig.DirectoryCreate:
+                        case XCommonConfig.DirectoryCreate:
                             await serverCoreLogicImpl.CreateDirectoryAsync(core);
                             break;
-                        case XCloudServerConfig.DirectoryDelete:
+                        case XCommonConfig.DirectoryDelete:
                             await serverCoreLogicImpl.DeleteDirectoryAsync(core);
                             break;
-                        case XCloudServerConfig.DirectoryRename:
+                        case XCommonConfig.DirectoryRename:
                             await serverCoreLogicImpl.RenameDirectoryAsync(core);
                             break;
-                        case XCloudServerConfig.FileUpload:
+                        case XCommonConfig.FileUpload:
                             serverCoreLogicImpl.UploadFileParallel(core);
                             break;
-                        case XCloudServerConfig.FileDownload:
+                        case XCommonConfig.FileDownload:
                             try { serverCoreLogicImpl.DownloadFileParallel(core); }
                             catch (Exception ex) { Log.Red(ex.Message); }
                             break;
-                        case XCloudServerConfig.FileDelete:
+                        case XCommonConfig.FileDelete:
                             await serverCoreLogicImpl.DeleteFileAsync(core);
                             break;
-                        case XCloudServerConfig.FileRename:
+                        case XCommonConfig.FileRename:
                             await serverCoreLogicImpl.RenameFileAsync(core);
                             break;
-                        case XCloudServerConfig.FileCopy:
+                        case XCommonConfig.FileCopy:
                             await serverCoreLogicImpl.CopyFileAsync(core);
                             break;
                     }

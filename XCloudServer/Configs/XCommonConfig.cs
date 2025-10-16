@@ -1,6 +1,7 @@
-namespace XCloudClient.Configs;
+namespace XCloudServer.Configs;
 
-public static class XCloudClientConfig {
+public static class XCommonConfig {
+    public const int MaxFileBufferSize = 1024 * 100 * 1024;
     public const int ChunkSize = 1024 * 16;
     
     public const string Register = "Register";
@@ -16,5 +17,4 @@ public static class XCloudClientConfig {
     public const string FileDelete = "frm";
     public const string FileRename = "fr";
     public const string FileCopy = "fc";
-
 }
